@@ -25,7 +25,7 @@ public class Tienda {
             return false;
         }
     }
-    public void listarVentas(){
+    public void listarEmpleados(){
        ArrayList<Empleado> empleados=this.empleados;
        for (Empleado empleado: empleados) {
                 System.out.println(empleado.getNombre());
