@@ -81,7 +81,7 @@ public class Inventario {
    public void registrarPedido(Proveedores proveedor,int ordenado,Producto producto){
        int a=producto.getCantidad();
        Pedido p= new Pedido(proveedor,ordenado,producto);
-       a-=ordenado;
+       a+=ordenado;
        producto.setCantidad(a);
        double b=producto.getPreciocompra();
        p.costo=b*ordenado;
@@ -90,11 +90,35 @@ public class Inventario {
    public void registrarVenta(int compra,Producto producto){
        int a=producto.getCantidad();
        Venta p= new Venta(compra,producto);
-       a+=compra;
+       a-=compra;
        producto.setCantidad(a);
        double b=producto.getPreciocompra();
        p.ganancia=b*compra;
        this.ganancias+=b*compra;
+       producto.numventas+=compra;
+   }
+   
+   public ArrayList<Producto> agotados(){
+       ArrayList<Producto> productos=this.productos;
+       ArrayList<Producto> agotado1;
+       agotado1= new ArrayList<>();
+       for (Producto producto: productos) {
+           if(producto.cantidad==0){
+            agotado1.add(producto);   
+           }
+            }
+       return agotado1;
+   }
+    public Producto masvendido(){
+       ArrayList<Producto> productos=this.productos;
+       Producto p1= new Producto(0,0,0);
+       int a=0;
+       for (Producto producto: productos) {
+           if(producto.numventas>a){
+            p1.equals(producto);   
+           }
+            }
+       return p1;
    }
 }
 

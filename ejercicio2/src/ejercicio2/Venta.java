@@ -10,8 +10,8 @@ package ejercicio2;
  * @author Nicolas
  */
 public class Venta {
-    private Producto producto;
-    private int comprado;
+    public Producto producto;
+    public int comprado;
     public double ganancia;
     public Venta(int comprado, Producto producto){
         this.comprado=comprado;

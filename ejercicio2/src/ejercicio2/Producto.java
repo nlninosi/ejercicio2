@@ -16,9 +16,10 @@ public class Producto {
     private double precioventa;
     private double preciocompra;
     private ArrayList<Pedido> pedidos;
-    private ArrayList<Venta> ventas;
+    public ArrayList<Venta> ventas;
     private ArrayList<Proveedores> proveedores;
-    private int cantidad;
+    public int cantidad;
+    public int numventas;
     public Producto(double precioventa, double preciocompra, int cantidad){
         this.cantidad=cantidad;
         this.preciocompra=preciocompra;
@@ -26,6 +27,7 @@ public class Producto {
         this.pedidos = new ArrayList<>();
         this.ventas = new ArrayList<>();
         this.proveedores = new ArrayList<>();
+        this.numventas=0;
     }
     public double getPrecioventa() {
         return precioventa;
@@ -91,5 +93,4 @@ public class Producto {
                 System.out.println(venta.getComprado());
             }
    }
-    
 }
