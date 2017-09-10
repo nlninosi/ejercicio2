@@ -20,7 +20,8 @@ public class Producto {
     private ArrayList<Proveedores> proveedores;
     public int cantidad;
     public int numventas;
-    public Producto(double precioventa, double preciocompra, int cantidad){
+    public Producto(int codigo,double precioventa, double preciocompra, int cantidad){
+        this.codigo=codigo;
         this.cantidad=cantidad;
         this.preciocompra=preciocompra;
         this.precioventa=precioventa;

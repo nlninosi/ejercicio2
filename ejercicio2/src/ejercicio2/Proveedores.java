@@ -32,6 +32,9 @@ public class Proveedores {
     public String getNombre(){
         return nombre;
     }
+    public double getDeuda(){
+        return deuda;
+    }
     public void listarProductos(){
        ArrayList<Producto> productos=this.productos;
        for (Producto producto: productos) {

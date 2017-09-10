@@ -10,9 +10,9 @@ package ejercicio2;
  * @author Nicolas
  */
 public class Pedido {
-    private Producto producto;
+    public Producto producto;
     private int ordenado;
-    private Proveedores proveedor;
+    public Proveedores proveedor;
     public double costo;
     public Pedido(Proveedores proveedor,int ordenado, Producto producto){
         this.ordenado=ordenado;

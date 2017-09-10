@@ -16,8 +16,8 @@ public class Inventario {
     private ArrayList<Proveedores> proveedores;
     private ArrayList<Pedido> pedidos;
     private ArrayList<Venta> ventas;
-    private double gastos;
-    private double ganancias;
+    public double gastos;
+    public double ganancias;
     public Inventario(){
         this.productos = new ArrayList<>();
         this.pedidos = new ArrayList<>();
@@ -57,45 +57,71 @@ public class Inventario {
    public void listarProductos(){
        ArrayList<Producto> productos=this.productos;
        for (Producto producto: productos) {
-                System.out.println(""+producto.getCantidad()+" "+producto.getPreciocompra()+"");
+                System.out.println("Codigo: "+producto.getCodigo()+"Cantidad: "+producto.getCantidad()+"Numero de ventas: "+producto.numventas+"Precio de compra: "+producto.getPreciocompra()+"Precio de venta: "+producto.getPrecioventa()+"");
             }
    }
    public void listarProveedores(){
        ArrayList<Proveedores> proveedores=this.proveedores;
        for (Proveedores proveedor: proveedores) {
-                System.out.println(proveedor.getNombre());
+                System.out.println(proveedor.getNombre()+" deudad: "+proveedor.getDeuda());
             }
    }
    public void listarPedidos(){
        ArrayList<Pedido> pedidos=this.pedidos;
        for (Pedido pedido: pedidos) {
-                System.out.println(pedido.getOrdenado());
+                System.out.println("Nombre proveedor:"+pedido.proveedor.getNombre()+" Codigo del producto"+pedido.producto.getCodigo()+" Cantidad Ordenada"+pedido.getOrdenado()+" Costo"+pedido.costo);
             }
    }
       public void listarVentas(){
        ArrayList<Venta> ventas=this.ventas;
        for (Venta venta: ventas) {
-                System.out.println(venta.getComprado());
+                System.out.println(" Codigo del producto"+venta.producto.getCodigo()+" Cantidad Comprada"+venta.comprado+" Ganancia"+venta.ganancia);
             }
    }
-   public void registrarPedido(Proveedores proveedor,int ordenado,Producto producto){
-       int a=producto.getCantidad();
-       Pedido p= new Pedido(proveedor,ordenado,producto);
+   public void registrarPedido(String nombre,int ordenado,int codigo){
+       ArrayList<Proveedores> proveedores=this.proveedores;
+       Proveedores pr1=new Proveedores("");
+       Producto p1=new Producto(0,0,0,0);
+       ArrayList<Producto> productos=this.productos;
+       for (Producto producto: productos) {
+                if(producto.getCodigo()==codigo){
+                    p1=producto;
+                    break;
+                }
+            }
+       for (Proveedores proveedor: proveedores) {
+                if(proveedor.getNombre().equals(nombre)){
+                    pr1=proveedor;
+                    break;
+                }
+            }
+       int a=p1.getCantidad();
+       Pedido p= new Pedido(pr1,ordenado,p1);
        a+=ordenado;
-       producto.setCantidad(a);
-       double b=producto.getPreciocompra();
+       p1.setCantidad(a);
+       double b=p1.getPreciocompra();
        p.costo=b*ordenado;
        this.gastos+=b*ordenado;
+       addPedido(p);
    }
-   public void registrarVenta(int compra,Producto producto){
-       int a=producto.getCantidad();
-       Venta p= new Venta(compra,producto);
+   public void registrarVenta(int compra,int codigo){
+       Producto p1=new Producto(0,0,0,0);
+       ArrayList<Producto> productos=this.productos;
+       for (Producto producto: productos) {
+                if(producto.getCodigo()==codigo){
+                    p1=producto;
+                    break;
+                }
+            }
+       int a=p1.getCantidad();
+       Venta p= new Venta(compra,p1);
        a-=compra;
-       producto.setCantidad(a);
-       double b=producto.getPreciocompra();
+       p1.setCantidad(a);
+       double b=p1.getPreciocompra();
        p.ganancia=b*compra;
        this.ganancias+=b*compra;
-       producto.numventas+=compra;
+       p1.numventas+=compra;
+       addVenta(p);
    }
    
    public ArrayList<Producto> agotados(){
@@ -109,9 +135,15 @@ public class Inventario {
             }
        return agotado1;
    }
+   public void listaAgotados(){
+       ArrayList<Producto> i=agotados();
+       for (Producto producto: i) {
+              System.out.println("Codigo: "+producto.getCodigo()+"Cantidad: "+producto.getCantidad()+"Numero de ventas: "+producto.numventas+"Precio de compra: "+producto.getPreciocompra()+"Precio de venta: "+producto.getPrecioventa()+"");
+        }
+   }
     public Producto masvendido(){
        ArrayList<Producto> productos=this.productos;
-       Producto p1= new Producto(0,0,0);
+       Producto p1= new Producto(0,0,0,0);
        int a=0;
        for (Producto producto: productos) {
            if(producto.numventas>a){

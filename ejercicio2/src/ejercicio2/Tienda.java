@@ -28,7 +28,7 @@ public class Tienda {
     public void listarEmpleados(){
        ArrayList<Empleado> empleados=this.empleados;
        for (Empleado empleado: empleados) {
-                System.out.println(empleado.getNombre());
+                System.out.println(empleado.getNombre()+" numero de horas"+empleado.totalhoras());
             }
    }
 }

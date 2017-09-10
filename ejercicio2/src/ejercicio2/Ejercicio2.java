@@ -89,8 +89,22 @@ public class Ejercicio2 {
                 i1.listaAgotados();
             }else if(opcion1 == 11){
                 System.out.println("Ingresos: "+i1.ganancias+" Gastos: "+i1.gastos);
-            }
+            }else{
+            System.out.println("Opcion Invalida");
+        }
         }else if(opcion == 2){
+            opcion2 = in.nextInt();
+            System.out.println("1. Registrar Empleado");
+            System.out.println("2. Lista de empleados");
+            if(opcion2 == 1){
+                System.out.println("Nombre Proveedor");
+                String nombre=in.next();
+                Empleado empleado= new Empleado(nombre);
+                t1.addEmpleado(empleado);
+            }
+            else if(opcion2 == 2){
+                t1.listarEmpleados();
+            }
             
         }else{
             System.out.println("Opcion Invalida");

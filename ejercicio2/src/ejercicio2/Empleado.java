@@ -14,6 +14,12 @@ public class Empleado {
     private double horaentrada;
     private double horasalida;
     private double sueldo;
+    public Empleado(String nombre){
+        this.nombre=nombre;
+        this.horaentrada=0;
+        this.horaentrada=0;
+        this.sueldo=0;
+    }
     public double getHoraentrada() {
         return horaentrada;
     }
